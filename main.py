@@ -39,7 +39,7 @@ bird_velocity = 0
 # TODO 1: Tweaking the physics DONE
 # Looks like the player is falling too quickly not giving a change to flap it's wing, maybe tweak around with the value of this variable
 gravity = 1.5
-jump = - 14
+jump = - 16
 # Pipe Variables -->
 pipe_x = 400
 pipe_width = 70
