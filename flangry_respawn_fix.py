@@ -7,6 +7,7 @@ in future PAs. In this PA, you will barely need to code—mostly just tweaking s
 fewer than five lines of new code. It is recommended that you read through the code and the comments explaining 
 some of the game mechanics.
 '''
+# Fixed respawn
 # Setup the screen -->
 screen = pygame.display.set_mode((400, 600))
 pygame.display.set_caption("Flappy Bird")
@@ -36,23 +37,23 @@ score_y = 10
 bird_x = 50
 bird_y = 300
 bird_velocity = 0
-# TODO 1: Tweaking the physics
+# TODO 1: Tweaking the physics DONE
 # Looks like the player is falling too quickly not giving a change to flap it's wing, maybe tweak around with the value of this variable
-gravity = 9.81
-jump = -10
+gravity = 1.5
+jump = - 16
 # Pipe Variables -->
 pipe_x = 400
 pipe_width = 70
-# TODO 2.1: A Little gap Problem
+# TODO 2.1: A Little gap Problem DONE
 # You probably noticed when running the code that it's impossible the player to go through the gaps
 # play around with the pipe_gap variable so that its big enough for the player to pass through
-pipe_gap = 20
+pipe_gap = 180
 pipe_height = random.randint(100, 400)
-# TODO 2.2: The too fast problem
+# TODO 2.2: The too fast problem DONE
 # The pipes are moving way too fast! Play around with the pipe_speed variable until you find a good
 # speed for the player to play in!
-pipe_speed = 20
-
+pipe_speed = 4.5
+bird_y = 300
 score = 0
 game_over = False
 game_started = False
@@ -61,9 +62,9 @@ clock = pygame.time.Clock()
 
 running = True
 while running:
-    # TODO 6: Changing the name!
+    # TODO 6: Changing the name! DONE ANGEL,
     # D'oh! This is not yout name isn't follow the detailed instructions on the PDF to complete this task.
-    name = "Homer Simpson"
+    name = "Angel Nieves"
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -75,12 +76,13 @@ while running:
                 elif game_over == False:
                     bird_velocity = jump
                 else:
-                    # TODO 3: Spawning back the Player
+                    # TODO 3: Spawning back the Player DONE; Alex
                     # After the bird crashes with a pipe the when spawning back the player it doesn't appear.
                     # It is your job to find why this is happening! (Hint: What variable stores the y coordinates
                     # of the bird)
-                    bird_velocity = 0
                     pipe_x = 400
+                    bird_y = 300
+                    bird_velocity = -14
                     score = 0
                     game_over = False
                     game_started = True
@@ -94,20 +96,21 @@ while running:
         if pipe_x < -70:
             pipe_x = 400
             pipe_height = random.randint(100, 400)
-            # TODO 4: Fixing the scoring
+            # TODO 4: Fixing the scoring DONE
             # When you pass through the pipes the score should be updated to the current score + 1. Implement the
             # logic to accomplish this scoring system.
-            score = 1
+            score = 1 + score
+
 
         if bird_y > 600 or bird_y < 0:
-            game_over = True
+                game_over = True
 
         bird_rect = pygame.Rect(bird_x, bird_y, 30, 30)
         top_pipe_rect = pygame.Rect(pipe_x, 0, pipe_width, pipe_height)
         bottom_pipe_rect = pygame.Rect(pipe_x, pipe_height + pipe_gap, pipe_width, 600)
 
         if bird_rect.colliderect(top_pipe_rect) or bird_rect.colliderect(bottom_pipe_rect):
-            game_over = True
+                game_over = True
 
     screen.fill(pygame.Color('grey12'))
     # TODO 5: A Bird's Color
