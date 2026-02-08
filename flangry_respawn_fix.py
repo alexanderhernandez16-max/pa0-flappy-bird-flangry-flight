@@ -7,6 +7,7 @@ in future PAs. In this PA, you will barely need to code—mostly just tweaking s
 fewer than five lines of new code. It is recommended that you read through the code and the comments explaining 
 some of the game mechanics.
 '''
+# Fixed respawn
 # Setup the screen -->
 screen = pygame.display.set_mode((400, 600))
 pygame.display.set_caption("Flappy Bird")
@@ -52,7 +53,7 @@ pipe_height = random.randint(100, 400)
 # The pipes are moving way too fast! Play around with the pipe_speed variable until you find a good
 # speed for the player to play in!
 pipe_speed = 4.5
-
+bird_y = 300
 score = 0
 game_over = False
 game_started = False
@@ -75,12 +76,13 @@ while running:
                 elif game_over == False:
                     bird_velocity = jump
                 else:
-                    # TODO 3: Spawning back the Player
+                    # TODO 3: Spawning back the Player DONE; Alex
                     # After the bird crashes with a pipe the when spawning back the player it doesn't appear.
                     # It is your job to find why this is happening! (Hint: What variable stores the y coordinates
                     # of the bird)
-                    bird_velocity = 0
                     pipe_x = 400
+                    bird_y = 300
+                    bird_velocity = -14
                     score = 0
                     game_over = False
                     game_started = True
@@ -101,14 +103,14 @@ while running:
 
 
         if bird_y > 600 or bird_y < 0:
-            game_over = True
+                game_over = True
 
         bird_rect = pygame.Rect(bird_x, bird_y, 30, 30)
         top_pipe_rect = pygame.Rect(pipe_x, 0, pipe_width, pipe_height)
         bottom_pipe_rect = pygame.Rect(pipe_x, pipe_height + pipe_gap, pipe_width, 600)
 
         if bird_rect.colliderect(top_pipe_rect) or bird_rect.colliderect(bottom_pipe_rect):
-            game_over = True
+                game_over = True
 
     screen.fill(pygame.Color('grey12'))
     # TODO 5: A Bird's Color
